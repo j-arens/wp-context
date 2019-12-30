@@ -1,0 +1,36 @@
+{
+    "name": "o/wp-context",
+    "description": "Utilities for determining the current context of a request in WordPress.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "j-arens",
+            "email": "arens.joshua@sbcglobal.net"
+        }
+    ],
+    "autoload": {
+      "psr-4": {
+        "O\\": "src/"
+      }
+    },
+    "scripts": {
+      "analyse": "phpstan analyse src",
+      "docker:up": "docker-compose up -d",
+      "docker:down": "docker-compose down",
+      "lint": "phpcs",
+      "_test:integration": "kahlan --config=test/integration/kahlan.php --spec=test/integration/spec --report=verbose",
+      "test:integration": "docker exec wp-context-wordpress php composer.phar --working-dir=/var/www/html/wp-content/plugins/wp-context _test:integration",
+      "test:unit": "kahlan --config=test/unit/kahlan.php --spec=test/unit --reporter=verbose"
+    },
+    "require": {
+      "php": ">=7.1"
+    },
+    "require-dev": {
+        "kahlan/kahlan": "^4.6",
+        "squizlabs/php_codesniffer": "^3.5",
+        "phpstan/phpstan": "^0.12.3",
+        "szepeviktor/phpstan-wordpress": "^0.5.0",
+        "guzzlehttp/guzzle": "^6.5"
+    }
+}
